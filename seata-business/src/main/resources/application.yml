@@ -1,0 +1,50 @@
+spring:
+  #  profiles:
+  #    active: dev  #这里直接填dev. 因为其它的场景都会引用外部的.properties文件来填充值。且并没有application-xxx.yml的配置文件存在
+  #数据库配置
+  datasource:
+    druid:
+      username: root
+      password: Yi296328516@
+      filter:
+        stat:
+          merge-sql: true
+          slow-sql-millis: 5000
+        wall:
+          config:
+            multi-statement-allow: true
+            update-allow: true
+          enabled: true
+      filters: wall,stat
+      initialSize: 1
+      logAbandoned: true
+      maxActive: 100
+      maxPoolPreparedStatementPerConnectionSize: 20
+      maxWait: 60000
+      minEvictableIdleTimeMillis: 300000
+      minIdle: 1
+      poolPreparedStatements: true
+      removeAbandoned: true
+      removeAbandonedTimeout: 180
+      testOnBorrow: false
+      testOnReturn: false
+      testWhileIdle: true
+      timeBetweenEvictionRunsMillis: 60000
+      url: jdbc:mysql://localhost:3306/db_gts_fescar?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+      validationQuery: SELECT 1
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+#dubbo配置
+dubbo:
+  application:
+    name: seata-business
+  registry:
+    protocol: zookeeper
+    address: localhost:2181
+    timeout: 2000
+  consumer:
+    timeout: 10000
