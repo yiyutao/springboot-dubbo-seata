@@ -21,7 +21,7 @@ public class FescarConfig {
     /**
      * init durid datasource
      *
-     * @Return: druidDataSource  datasource instance
+     * @return : druidDataSource  datasource instance
      */
     @Bean
     @Primary
@@ -31,8 +31,8 @@ public class FescarConfig {
 
     /**
      * init datasource proxy
-     * @Param: druidDataSource  datasource bean instance
-     * @Return: DataSourceProxy  datasource proxy
+     * @param druidDataSource   datasource bean instance
+     * @return : DataSourceProxy  datasource proxy
      */
     @Bean
     public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource){
@@ -41,8 +41,8 @@ public class FescarConfig {
 
     /**
      * init mybatis sqlSessionFactory
-     * @Param: dataSourceProxy  datasource proxy
-     * @Return: DataSourceProxy  datasource proxy
+     * @param dataSourceProxy   datasource proxy
+     * @return DataSourceProxy  datasource proxy
      */
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSourceProxy dataSourceProxy) throws Exception {

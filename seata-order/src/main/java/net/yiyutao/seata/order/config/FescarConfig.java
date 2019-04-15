@@ -7,8 +7,6 @@ import com.alibaba.fescar.spring.annotation.GlobalTransactionScanner;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -24,28 +22,30 @@ public class FescarConfig {
     /**
      * init durid datasource
      *
-     * @Return: druidDataSource  datasource instance
+     * @return : druidDataSource  datasource instance
      */
     @Bean
     @Primary
-    public DruidDataSource druidDataSource(){
+    public DruidDataSource druidDataSource() {
         return DruidDataSourceBuilder.create().build();
     }
 
     /**
      * init datasource proxy
-     * @Param: druidDataSource  datasource bean instance
-     * @Return: DataSourceProxy  datasource proxy
+     *
+     * @param druidDataSource datasource bean instance
+     * @return DataSourceProxy  datasource proxy
      */
     @Bean
-    public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource){
+    public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource) {
         return new DataSourceProxy(druidDataSource);
     }
 
     /**
      * init mybatis sqlSessionFactory
-     * @Param: dataSourceProxy  datasource proxy
-     * @Return: DataSourceProxy  datasource proxy
+     *
+     * @param dataSourceProxy datasource proxy
+     * @return DataSourceProxy  datasource proxy
      */
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSourceProxy dataSourceProxy) throws Exception {
@@ -57,6 +57,11 @@ public class FescarConfig {
         return factoryBean.getObject();
     }
 
+    /**
+     * 事务配置
+     *
+     * @return GlobalTransactionScanner
+     */
     @Bean
     public GlobalTransactionScanner globalTransactionScanner() {
         return new GlobalTransactionScanner("order-gts-fescar-example", "my_test_tx_group");
